@@ -1,18 +1,20 @@
 #include<iostream>
 #include<string>
 #include<string.h>
+#include<stdio.h>
 
 using namespace std;
 
 int main()
 {
 string s1, s2;
-int tbl[1000][1000];
-while((cin>> s1 >> s2))
+int tbl[1001][1001];
+while(getline(cin,s1))
 {
+getline(cin,s2);
 string s11 = " " + s1;
 string s22 = " " + s2;
-memset(tbl, 0, 1000*1000);
+memset(tbl, 0, 1001*1001);
 for(int i=1; i <(unsigned int)s11.length(); ++i)
 {
     for(int j=1; j<(unsigned int)s22.length();++j)
@@ -27,8 +29,8 @@ for(int i=1; i <(unsigned int)s11.length(); ++i)
 	}
     }
 }
-//cout << s1 << "\t "<<s2<<endl;
 cout<<tbl[s11.length()-1][s22.length()-1] << endl;
+s1="";s2="";
 }
 
 return 0;
