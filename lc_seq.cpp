@@ -28,7 +28,7 @@ for(int i=1; i <(unsigned int)s11.length(); ++i)
     }
 }
 //cout << s1 << "\t "<<s2<<endl;
-cout << "\n ans is " << tbl[s11.length()-1][s22.length()-1] << endl;
+cout<<tbl[s11.length()-1][s22.length()-1] << endl;
 }
 
 return 0;
