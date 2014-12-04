@@ -20,6 +20,7 @@ void printSegTree(vector<segTreeNode>& tree, int sz) {
     cout<< "\n";
 }
 
+// build tree
 void buildSegTree(vector<segTreeNode>& tree, int* arr, int node, int left, int right) 
 {
     int sz = 17;
@@ -43,6 +44,28 @@ void buildSegTree(vector<segTreeNode>& tree, int* arr, int node, int left, int r
     }
 }
 
+// query
+int query(vector<segTreeNode>& tree, int* arr, int node, int left, int right, int i, int j)
+{
+
+if(i>right || j < left) //left i  j  ||  right i j clearly not in line
+    return -1;
+if(left >= i && right <= j)   // i left  right  j  , subset of query
+    return tree[node].value; 
+
+int mid = (left + right)/2;
+int p1 = query(tree, arr, 2*node, left, mid, i, j);
+int p2 = query(tree, arr, 2*node+1, mid+1, right, i, j);
+if(p1 == -1) return p2;
+if(p2 == -1) return p1;
+
+if(arr[p1] < arr[p2])
+    return p1;
+else
+    return p2;
+
+}
+
 int getSegmentTreeSize(int N) 
 {
 int size = 1;
@@ -59,5 +82,6 @@ cout << "\n size of tree " << sz << endl;
 vector<segTreeNode> tree(sz);
 buildSegTree(tree,arr, 1,0, 6);
 printSegTree(tree,sz);
+cout << "\n ans to query  = " << query(tree, arr, 1, 0, 6, 2, 5) << "\n";
 return 0;
 }
